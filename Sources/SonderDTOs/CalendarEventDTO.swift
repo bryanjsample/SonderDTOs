@@ -5,49 +5,43 @@
 //  Created by Bryan Sample on 11/14/25.
 //
 
-import Vapor
+import Foundation
 
-struct CalendarEventDTO: Content {
-    var id: UUID?
-    var hostID: UUID
-    var circleID: UUID
-    var title: String
-    var description: String
-    var startTime: Date
-    var endTime: Date
-    var createdAt: Date?
-    
-    func toModel() -> CalendarEvent {
-        let model = CalendarEvent()
-        model.id = self.id
-        model.$host.id = self.hostID
-        model.$circle.id = self.circleID
-        model.title = self.title
-        model.description = self.description
-        model.startTime = self.startTime
-        model.endTime = self.endTime
-        model.createdAt = self.createdAt
-        return model
+public struct CalendarEventDTO: Codable, Sendable {
+    public var id: UUID?
+    public var hostID: UUID
+    public var circleID: UUID
+    public var title: String
+    public var description: String
+    public var startTime: Date
+    public var endTime: Date
+    public var createdAt: Date?
+
+    public init(
+        id: UUID? = nil,
+        hostID: UUID,
+        circleID: UUID,
+        title: String,
+        description: String,
+        startTime: Date,
+        endTime: Date,
+        createdAt: Date? = nil
+    ) {
+        self.id = id
+        self.hostID = hostID
+        self.circleID = circleID
+        self.title = title
+        self.description = description
+        self.startTime = startTime
+        self.endTime = endTime
+        self.createdAt = createdAt
     }
 }
 
 extension CalendarEventDTO {
-    
-    init(from event: CalendarEvent) {
-        self.id = event.id ?? nil
-        self.hostID = event.$host.id
-        self.circleID = event.$circle.id
-        self.title = event.title
-        self.description = event.description
-        self.startTime = event.startTime
-        self.endTime = event.endTime
-        self.createdAt = event.createdAt
-    }
-    
-    func validateAndSanitize() throws -> CalendarEventDTO {
+    public func validateAndSanitize() throws -> CalendarEventDTO {
         try InputValidator.validateEvent(self)
         let sanitizedDTO = InputSanitizer.sanitizeEvent(self)
         return sanitizedDTO
     }
-    
 }

@@ -5,37 +5,34 @@
 //  Created by Bryan Sample on 11/14/25.
 //
 
-import Vapor
+import Foundation
 
-struct CommentDTO: Content {
-    
-    var id: UUID?
-    var postID: UUID
-    var authorID: UUID
-    var content: String
-    var createdAt: Date?
-    
-    func toModel() -> Comment {
-        let model = Comment()
-        model.$post.id = self.postID
-        model.$author.id = self.authorID
-        model.content = self.content
-        model.createdAt = self.createdAt
-        return model
+public struct CommentDTO: Codable, Sendable {
+
+    public var id: UUID?
+    public var postID: UUID
+    public var authorID: UUID
+    public var content: String
+    public var createdAt: Date?
+
+    public init(
+        id: UUID? = nil,
+        postID: UUID,
+        authorID: UUID,
+        content: String,
+        createdAt: Date? = nil
+    ) {
+        self.id = id
+        self.postID = postID
+        self.authorID = authorID
+        self.content = content
+        self.createdAt = createdAt
     }
+
 }
 
 extension CommentDTO {
-    
-    init(from comment: Comment) {
-        self.id = comment.id ?? nil
-        self.postID = comment.$post.id
-        self.authorID = comment.$author.id
-        self.content = comment.content
-        self.createdAt = comment.createdAt ?? nil
-    }
-    
-    func validateAndSanitize() throws -> CommentDTO {
+    public func validateAndSanitize() throws -> CommentDTO {
         try InputValidator.validateComment(self)
         let sanitizedDTO = InputSanitizer.sanitizeComment(self)
         return sanitizedDTO

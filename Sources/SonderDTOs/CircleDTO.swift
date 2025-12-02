@@ -5,24 +5,26 @@
 //  Created by Bryan Sample on 11/14/25.
 //
 
-import Vapor
+import Foundation
 
-struct CircleDTO: Content {
-    
-    var id: UUID?
-    var name: String
-    var description: String
-    var pictureUrl: String?
-    
-    func toModel() -> Circle {
-        let model = Circle()
-        model.id = self.id ?? nil
-        model.name = self.name
-        model.description = self.description
-        model.pictureUrl = self.pictureUrl ?? nil
-        return model
+public struct CircleDTO: Codable, Sendable {
+
+    public var id: UUID?
+    public var name: String
+    public var description: String
+    public var pictureUrl: String?
+
+    public init(
+        id: UUID? = nil,
+        name: String,
+        description: String,
+        pictureUrl: String? = nil
+    ) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.pictureUrl = pictureUrl
     }
-    
 }
 
 extension CircleDTO {
@@ -32,15 +34,8 @@ extension CircleDTO {
         self.description = ""
         self.pictureUrl = nil
     }
-    
-    init(from circle: Circle) {
-        self.id = circle.id ?? nil
-        self.name = circle.name
-        self.description = circle.description
-        self.pictureUrl = circle.pictureUrl ?? nil
-    }
-    
-    func validateAndSanitize() throws -> CircleDTO {
+
+    public func validateAndSanitize() throws -> CircleDTO {
         try InputValidator.validateCircle(self)
         let sanitizedDTO = InputSanitizer.sanitizeCircle(self)
         return sanitizedDTO

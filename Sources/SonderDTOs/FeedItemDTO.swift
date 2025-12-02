@@ -5,24 +5,24 @@
 //  Created by Bryan Sample on 11/20/25.
 //
 
-import Vapor
+import Foundation
 
-enum FeedItemDTO: Codable {
+public enum FeedItemDTO: Codable, Sendable {
     case post(PostDTO)
     case event(CalendarEventDTO)
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case type
         case post
         case event
     }
 
-    enum ItemType: String, Codable {
+    public enum ItemType: String, Codable {
         case post
         case event
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(ItemType.self, forKey: .type)
         switch type {
@@ -35,7 +35,7 @@ enum FeedItemDTO: Codable {
         }
     }
 
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
         case .post(let dto):
@@ -47,10 +47,10 @@ enum FeedItemDTO: Codable {
         }
     }
 
-    var createdAt: Date? {
+    public var createdAt: Date? {
         switch self {
-        case .post(let p): return p.createdAt
-        case .event(let e): return e.createdAt
+        case .post(let post): return post.createdAt
+        case .event(let event): return event.createdAt
         }
     }
 }

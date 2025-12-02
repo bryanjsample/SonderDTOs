@@ -5,9 +5,11 @@
 //  Created by Bryan Sample on 11/20/25.
 //
 
-import Vapor
-
-struct FeedResponseDTO: Content {
+public struct FeedResponseDTO: Codable, Sendable {
     let items: [FeedItemDTO]
 //    let nextCursor: String?
+
+    public init(items: [FeedItemDTO]) {
+        self.items = items
+    }
 }

@@ -5,41 +5,36 @@
 //  Created by Bryan Sample on 11/14/25.
 //
 
-import Vapor
+import Foundation
 
-struct PostDTO: Content {
-    
-    var id: UUID?
-    var circleID: UUID
-    var authorID: UUID
-    var content: String
-    var createdAt: Date?
-    
-    func toModel() -> Post {
-        let model = Post()
-        model.id = self.id
-        model.$circle.id = self.circleID
-        model.$author.id = self.authorID
-        model.content = self.content
-        model.createdAt = self.createdAt
-        return model
+public struct PostDTO: Codable, Sendable {
+
+    public var id: UUID?
+    public var circleID: UUID
+    public var authorID: UUID
+    public var content: String
+    public var createdAt: Date?
+
+    public init(
+        id: UUID? = nil,
+        circleID: UUID,
+        authorID: UUID,
+        content: String,
+        createdAt: Date?
+    ) {
+        self.id = id
+        self.circleID = circleID
+        self.authorID = authorID
+        self.content = content
+        self.createdAt = createdAt
     }
+
 }
 
 extension PostDTO {
-
-    init(from post: Post) {
-        self.id = post.id ?? nil
-        self.circleID = post.$circle.id
-        self.authorID = post.$author.id
-        self.content = post.content
-        self.createdAt = post.createdAt ?? nil
-    }
-    
-    func validateAndSanitize() throws -> PostDTO {
+    public func validateAndSanitize() throws -> PostDTO {
         try InputValidator.validatePost(self)
         let sanitizedDTO = InputSanitizer.sanitizePost(self)
         return sanitizedDTO
     }
-    
 }

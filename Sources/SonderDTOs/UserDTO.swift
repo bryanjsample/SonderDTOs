@@ -5,52 +5,41 @@
 //  Created by Bryan Sample on 11/14/25.
 //
 
-import Vapor
+import Foundation
 
-struct UserDTO: Content {
-    
-    var id: UUID?
-    var email: String
-    var firstName: String
-    var lastName: String
-    var username: String?
-    var pictureUrl: String?
-    
-    func toModel() -> User {
-        let model = User()
-        
-        model.id = self.id ?? nil
-        model.email = self.email
-        model.firstName = self.firstName
-        model.lastName = self.lastName
-        model.username = self.username ?? nil
-        model.pictureUrl = self.pictureUrl ?? nil
-        
-        return model
+public struct UserDTO: Codable, Sendable {
+
+    public var id: UUID?
+    public var circleID: UUID?
+    public var email: String
+    public var firstName: String
+    public var lastName: String
+    public var username: String?
+    public var pictureUrl: String?
+
+    public init(
+        id: UUID? = nil,
+        circleID: UUID? = nil,
+        email: String,
+        firstName: String,
+        lastName: String,
+        username: String? = nil,
+        pictureUrl: String? = nil
+    ) {
+        self.id = id
+        self.circleID = circleID
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+        self.username = username
+        self.pictureUrl = pictureUrl
     }
-    
+
 }
 
 extension UserDTO {
-    init() {
-        self.id = nil
-        self.email = ""
-        self.firstName = ""
-        self.lastName = ""
-        self.username = nil
-        self.pictureUrl = nil
-    }
-    
-    init(from user: User) {
-        self.id = user.id ?? nil
-        self.email = user.email
-        self.firstName = user.firstName
-        self.lastName = user.lastName
-        self.username = user.username ?? nil
-        self.pictureUrl = user.pictureUrl ?? nil
-    }
-    
-    func validateAndSanitize() throws -> UserDTO {
+
+    public func validateAndSanitize() throws -> UserDTO {
         try InputValidator.validateUser(self)
         let sanitizedDTO = InputSanitizer.sanitizeUser(self)
         return sanitizedDTO
