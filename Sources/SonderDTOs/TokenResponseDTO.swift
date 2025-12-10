@@ -6,19 +6,19 @@
 //
 
 public struct TokenResponseDTO: Codable, Sendable {
-    public let needsToBeOnboarded: Bool
-    public let userInGroup: Bool
+    public let userNeedsToBeOnboarded: Bool?
+    public let userInCircle: Bool?
     public let accessToken: AccessTokenDTO
     public let refreshToken: RefreshTokenDTO
 
     public init(
-        needsToBeOnboarded: Bool = false,
-        userInGroup: Bool = true,
+        userNeedsToBeOnboarded: Bool? = nil,
+        userInCircle: Bool? = nil,
         accessToken: AccessTokenDTO,
         refreshToken: RefreshTokenDTO
     ) {
-        self.needsToBeOnboarded = needsToBeOnboarded
-        self.userInGroup = userInGroup
+        self.userNeedsToBeOnboarded = userNeedsToBeOnboarded
+        self.userInCircle = userInCircle
         self.accessToken = accessToken
         self.refreshToken = refreshToken
     }
