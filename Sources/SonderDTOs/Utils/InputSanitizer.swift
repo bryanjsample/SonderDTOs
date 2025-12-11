@@ -13,8 +13,9 @@ enum InputSanitizer {
         let lastName = sanitizeName(user.lastName)
         let username = sanitizeUsername(user.username)
         let pictureUrl = sanitizePictureUrl(user.pictureUrl)
+        let isOnboarded = user.isOnboarded
         // swiftlint:disable:next line_length
-        return UserDTO(id: id, email: email, firstName: firstName, lastName: lastName, username: username, pictureUrl: pictureUrl)
+        return UserDTO(id: id, email: email, firstName: firstName, lastName: lastName, username: username, pictureUrl: pictureUrl, isOnboarded: isOnboarded)
     }
 
     static func sanitizeCircle(_ circle: CircleDTO) -> CircleDTO {
