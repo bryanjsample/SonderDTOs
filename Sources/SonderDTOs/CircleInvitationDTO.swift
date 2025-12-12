@@ -10,16 +10,19 @@ import Foundation
 public struct CircleInvitationDTO: Codable, Sendable {
 
     public var invitation: String
-
-    public init(_ invitation: String) { self.invitation = invitation }
-
-}
-
-extension CircleInvitationDTO {
-    public func validateAndSanitize() throws -> CircleInvitationDTO? {
-//        try InputValidator.validateComment(self)
-//        let sanitizedDTO = InputSanitizer.sanitizeComment(self)
-//        return sanitizedDTO
-        return nil
+    public var circleID: UUID
+    public var expiresAt: Date
+    public var revoked: Bool
+    public init(
+        invitation: String,
+        circleID: UUID,
+        expiresAt: Date,
+        revoked: Bool
+    ) {
+        self.invitation = invitation
+        self.circleID = circleID
+        self.expiresAt = expiresAt
+        self.revoked = revoked
     }
+
 }

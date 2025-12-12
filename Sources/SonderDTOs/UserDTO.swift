@@ -16,7 +16,7 @@ public struct UserDTO: Codable, Sendable {
     public var lastName: String
     public var username: String?
     public var pictureUrl: String?
-    public var isOnboarded: Bool
+    public var isOnboarded: Bool?
 
     public init(
         id: UUID? = nil,
@@ -26,7 +26,7 @@ public struct UserDTO: Codable, Sendable {
         lastName: String,
         username: String? = nil,
         pictureUrl: String? = nil,
-        isOnboarded: Bool
+        isOnboarded: Bool? = nil
     ) {
         self.id = id
         self.circleID = circleID
