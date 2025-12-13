@@ -5,7 +5,7 @@
 //  Created by Bryan Sample on 11/20/25.
 //
 
-public struct FeedResponseDTO: Codable, Sendable {
+public struct FeedResponseDTO: Codable, Sendable, SonderDTO {
     let items: [FeedItemDTO]
 //    let nextCursor: String?
 

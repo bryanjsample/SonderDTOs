@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CircleInvitationDTO: Codable, Sendable {
+public struct CircleInvitationDTO: Codable, Sendable, SonderDTO {
 
     public var invitation: String
     public var circleID: UUID

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CommentDTO: Codable, Sendable {
+public struct CommentDTO: Codable, Sendable, SonderDTO {
 
     public var id: UUID?
     public var postID: UUID

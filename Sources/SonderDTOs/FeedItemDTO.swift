@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum FeedItemDTO: Codable, Sendable {
+public enum FeedItemDTO: Codable, Sendable, SonderDTO {
     case post(PostDTO)
     case event(CalendarEventDTO)
 

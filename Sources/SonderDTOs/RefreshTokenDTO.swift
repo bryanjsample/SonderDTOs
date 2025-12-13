@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RefreshTokenDTO: Codable, Sendable {
+public struct RefreshTokenDTO: Codable, Sendable, SonderDTO {
     public var token: String
     public var ownerID: UUID
     public var expiresAt: Date

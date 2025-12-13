@@ -5,7 +5,7 @@
 //  Created by Bryan Sample on 12/1/25.
 //
 
-public struct TokenResponseDTO: Codable, Sendable {
+public struct TokenResponseDTO: Codable, Sendable, SonderDTO {
     public let userNeedsToBeOnboarded: Bool?
     public let userInCircle: Bool?
     public let accessToken: AccessTokenDTO
