@@ -9,20 +9,23 @@ import Foundation
 
 public struct CircleInvitationDTO: Codable, Sendable, SonderDTO {
 
+    public var id: UUID?
     public var invitation: String
     public var circleID: UUID
     public var expiresAt: Date
     public var revoked: Bool
+
     public init(
+        id: UUID? = nil,
         invitation: String,
         circleID: UUID,
         expiresAt: Date,
         revoked: Bool
     ) {
+        self.id = id
         self.invitation = invitation
         self.circleID = circleID
         self.expiresAt = expiresAt
         self.revoked = revoked
     }
-
 }
