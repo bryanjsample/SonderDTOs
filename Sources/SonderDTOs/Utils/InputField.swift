@@ -5,7 +5,7 @@
 //  Created by Bryan Sample on 11/16/25.
 //
 
-public enum InputField: Hashable, CustomStringConvertible {
+public enum InputField: Hashable, Sendable, CustomStringConvertible {
     case email, name, username, url, title, description, textBlock, dateTime
 
     public var description: String {
