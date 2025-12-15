@@ -5,10 +5,10 @@
 //  Created by Bryan Sample on 11/16/25.
 //
 
-enum InputField: Hashable, CustomStringConvertible {
-    case email, name, username, pictureUrl, title, description, textBlock
+public enum InputField: Hashable, CustomStringConvertible {
+    case email, name, username, url, title, description, textBlock, dateTime
 
-    var description: String {
+    public var description: String {
         switch self {
         case .email:
             return "email"
@@ -16,14 +16,16 @@ enum InputField: Hashable, CustomStringConvertible {
             return "name"
         case .username:
             return "username"
-        case .pictureUrl:
-            return "pictureUrl"
+        case .url:
+            return "url"
         case .title:
             return "title"
         case .description:
             return "description"
         case .textBlock:
             return "textBlock"
+        case .dateTime:
+            return "dateTime"
         }
     }
 
@@ -52,7 +54,7 @@ enum InputField: Hashable, CustomStringConvertible {
             return #"^[A-Za-z\u00C0-\u017F]+(?:[ '\u2019-][A-Za-z\u00C0-\u017F]+)*$"#
         case .username:
             return #"^(?!.*__)[a-zA-Z][a-zA-Z0-9_]{2,14}$"# // min length of 3 max length of 15
-        case .pictureUrl:
+        case .url:
             // swiftlint:disable:next line_length
             return #"^https?:\/\/[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)*+(?:\/[^\s?#<>%]+)*\.(?:jpg|jpeg|png|gif|webp|bmp|svg)(?:\?[^\s#<>%]*)?(?:#[^\s<>%]*)?$"#
         case .title:
@@ -61,6 +63,8 @@ enum InputField: Hashable, CustomStringConvertible {
             return #"^[^@#$%<>;{}\\]{2,150}$"#
         case .textBlock:
             return #"^(?s)[^\u0000-\u0008\u000B\u000C\u000E-\u001F@#$%<>;{}\\]{1,1000}$"#
+        case .dateTime:
+            return "regex not implemented for dateTime"
         }
     }
 }
