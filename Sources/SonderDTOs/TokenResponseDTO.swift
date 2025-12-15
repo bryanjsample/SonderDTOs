@@ -6,18 +6,18 @@
 //
 
 public struct TokenResponseDTO: Codable, Sendable, SonderDTO {
-    public let userNeedsToBeOnboarded: Bool?
+    public let userIsOnboarded: Bool?
     public let userInCircle: Bool?
     public let accessToken: AccessTokenDTO
     public let refreshToken: RefreshTokenDTO
 
     public init(
-        userNeedsToBeOnboarded: Bool? = nil,
+        userIsOnboarded: Bool? = nil,
         userInCircle: Bool? = nil,
         accessToken: AccessTokenDTO,
         refreshToken: RefreshTokenDTO
     ) {
-        self.userNeedsToBeOnboarded = userNeedsToBeOnboarded
+        self.userIsOnboarded = userIsOnboarded
         self.userInCircle = userInCircle
         self.accessToken = accessToken
         self.refreshToken = refreshToken
