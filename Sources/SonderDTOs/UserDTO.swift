@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UserDTO: Codable, Sendable, SonderDTO {
+public struct UserDTO: Codable, Sendable, SonderDTO, Identifiable {
 
     public var id: UUID?
     public var circleID: UUID?
