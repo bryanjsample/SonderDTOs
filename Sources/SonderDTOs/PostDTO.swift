@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PostDTO: Codable, Sendable, SonderDTO {
+public struct PostDTO: Codable, Sendable, SonderDTO, Identifiable {
 
     public var id: UUID?
     public var circleID: UUID
@@ -20,7 +20,7 @@ public struct PostDTO: Codable, Sendable, SonderDTO {
         circleID: UUID,
         authorID: UUID,
         content: String,
-        createdAt: Date?
+        createdAt: Date? = nil
     ) {
         self.id = id
         self.circleID = circleID
