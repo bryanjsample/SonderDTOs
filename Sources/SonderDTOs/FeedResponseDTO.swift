@@ -6,7 +6,7 @@
 //
 
 public struct FeedResponseDTO: Codable, Sendable, SonderDTO {
-    let items: [FeedItemDTO]
+    public let items: [FeedItemDTO]
 //    let nextCursor: String?
 
     public init(items: [FeedItemDTO]) {

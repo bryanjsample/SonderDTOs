@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum FeedItemDTO: Codable, Sendable, SonderDTO {
+public enum FeedItemDTO: Codable, Sendable, Identifiable, SonderDTO {
     case post(PostDTO)
     case event(CalendarEventDTO)
 
@@ -44,6 +44,13 @@ public enum FeedItemDTO: Codable, Sendable, SonderDTO {
         case .event(let dto):
             try container.encode(ItemType.event, forKey: .type)
             try container.encode(dto, forKey: .event)
+        }
+    }
+
+    public var id: String {
+        switch self {
+        case .post(let post): return "post-\(post.id?.uuidString ?? "no id")"
+        case .event(let event): return "event-\(event.id?.uuidString ?? "no id")"
         }
     }
 
