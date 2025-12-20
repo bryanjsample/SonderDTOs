@@ -12,6 +12,7 @@ public struct PostDTO: Codable, Sendable, SonderDTO, Identifiable {
     public var id: UUID?
     public var circleID: UUID
     public var authorID: UUID
+    public var author: UserDTO?
     public var content: String
     public var createdAt: Date?
 
@@ -19,12 +20,14 @@ public struct PostDTO: Codable, Sendable, SonderDTO, Identifiable {
         id: UUID? = nil,
         circleID: UUID,
         authorID: UUID,
+        author: UserDTO? = nil,
         content: String,
         createdAt: Date? = nil
     ) {
         self.id = id
         self.circleID = circleID
         self.authorID = authorID
+        self.author = author
         self.content = content
         self.createdAt = createdAt
     }
