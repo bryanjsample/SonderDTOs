@@ -13,17 +13,20 @@ public struct CircleDTO: Codable, Sendable, SonderDTO {
     public var name: String
     public var description: String
     public var pictureUrl: String?
+    public var members: [UserDTO]?
 
     public init(
         id: UUID? = nil,
         name: String,
         description: String,
-        pictureUrl: String? = nil
+        pictureUrl: String? = nil,
+        members: [UserDTO]? = nil
     ) {
         self.id = id
         self.name = name
         self.description = description
         self.pictureUrl = pictureUrl
+        self.members = members
     }
 }
 
