@@ -60,4 +60,41 @@ public enum FeedItemDTO: Codable, Sendable, Identifiable, SonderDTO {
         case .event(let event): return event.createdAt
         }
     }
+
+    public var ownerPictureUrl: String? {
+        switch self {
+        case .post(let post): return post.author?.pictureUrl
+        case .event(let event): return event.host?.pictureUrl
+        }
+    }
+
+    public var firstName: String? {
+        switch self {
+        case .post(let post): return post.author?.firstName
+        case .event(let event): return event.host?.firstName
+        }
+    }
+
+    public var lastName: String? {
+        switch self {
+        case .post(let post): return post.author?.lastName
+        case .event(let event): return event.host?.lastName
+        }
+    }
+
+    public var fullName: String {
+        switch self {
+        case .post(let post):
+            return "\(post.author?.firstName ?? "no first") \(post.author?.lastName ?? "no last")"
+        case .event(let event):
+            return "\(event.host?.firstName ?? "no first") \(event.host?.lastName ?? "no last")"
+        }
+    }
+
+    public var username: String? {
+        switch self {
+        case .post(let post): return post.author?.username
+        case .event(let event): return event.host?.username
+        }
+    }
 }
