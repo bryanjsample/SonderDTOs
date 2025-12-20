@@ -12,6 +12,7 @@ public struct CommentDTO: Codable, Sendable, SonderDTO {
     public var id: UUID?
     public var postID: UUID
     public var authorID: UUID
+    public var author: UserDTO?
     public var content: String
     public var createdAt: Date?
 
@@ -19,12 +20,14 @@ public struct CommentDTO: Codable, Sendable, SonderDTO {
         id: UUID? = nil,
         postID: UUID,
         authorID: UUID,
+        author: UserDTO? = nil,
         content: String,
         createdAt: Date? = nil
     ) {
         self.id = id
         self.postID = postID
         self.authorID = authorID
+        self.author = author
         self.content = content
         self.createdAt = createdAt
     }

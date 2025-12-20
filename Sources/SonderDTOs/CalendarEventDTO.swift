@@ -7,9 +7,10 @@
 
 import Foundation
 
-public struct CalendarEventDTO: Codable, Sendable, SonderDTO {
+public struct CalendarEventDTO: Codable, Sendable, SonderDTO, Identifiable {
     public var id: UUID?
     public var hostID: UUID
+    public var host: UserDTO?
     public var circleID: UUID
     public var title: String
     public var description: String
@@ -20,6 +21,7 @@ public struct CalendarEventDTO: Codable, Sendable, SonderDTO {
     public init(
         id: UUID? = nil,
         hostID: UUID,
+        host: UserDTO? = nil,
         circleID: UUID,
         title: String,
         description: String,
@@ -29,6 +31,7 @@ public struct CalendarEventDTO: Codable, Sendable, SonderDTO {
     ) {
         self.id = id
         self.hostID = hostID
+        self.host = host
         self.circleID = circleID
         self.title = title
         self.description = description
