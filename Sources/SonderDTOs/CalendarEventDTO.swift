@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CalendarEventDTO: Codable, Sendable, SonderDTO, Identifiable {
+public struct CalendarEventDTO: Codable, Sendable, SonderDTO, Identifiable, FeedItem {
     public var id: UUID?
     public var hostID: UUID
     public var host: UserDTO?

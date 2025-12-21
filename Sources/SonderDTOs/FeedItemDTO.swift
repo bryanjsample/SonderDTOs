@@ -22,6 +22,17 @@ public enum FeedItemDTO: Codable, Sendable, Identifiable, SonderDTO {
         case event
     }
 
+    public init(from feedItem: FeedItem) {
+        switch feedItem {
+        case let post as PostDTO:
+            self = .post(post)
+        case let event as CalendarEventDTO:
+            self = .event(event)
+        default:
+            fatalError("Unsupported FeedItem type")
+        }
+    }
+
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(ItemType.self, forKey: .type)
